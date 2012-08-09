@@ -3,13 +3,35 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <TextView
+    <ProgressBar
+        android:id="@+id/dbProgressBarOutput"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:padding="@dimen/padding_medium"
-        android:text="@string/hello_world"
-        tools:context=".MainActivity" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="35dp" />
+
+    <TextView
+        android:id="@+id/dbTextOutput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/dbProgressBarOutput"
+        android:layout_marginLeft="37dp"
+        android:layout_marginTop="68dp"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/dbTextOutput"
+        android:layout_below="@+id/dbTextOutput"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="130dp"
+        android:text="Button" />
 
 </RelativeLayout>
