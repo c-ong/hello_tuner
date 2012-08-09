@@ -4,34 +4,43 @@
     android:layout_height="fill_parent" >
 
     <ProgressBar
-        android:id="@+id/dbProgressBarOutput"
+        android:id="@+id/dBProgressBarOutput"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="35dp" />
-
-    <TextView
-        android:id="@+id/dbTextOutput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/dbProgressBarOutput"
-        android:layout_marginLeft="37dp"
-        android:layout_marginTop="68dp"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_centerVertical="true" />
 
     <Button
         android:id="@+id/start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/dbTextOutput"
-        android:layout_below="@+id/dbTextOutput"
-        android:layout_marginLeft="17dp"
-        android:layout_marginTop="130dp"
-        android:text="Button" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/start" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/dBProgressBarOutput"
+        android:layout_centerHorizontal="true" >
+
+        <TextView
+            android:id="@+id/dBText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/dBProgressBarOutput"
+            android:layout_marginRight="16dp"
+            android:text="@string/dBDefault"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/dBLabelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/dBText"
+            android:text="@string/dBLabel"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </RelativeLayout>
 
 </RelativeLayout>
