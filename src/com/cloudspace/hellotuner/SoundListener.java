@@ -1,8 +1,8 @@
 package com.cloudspace.hellotuner;
 
-public class Listener {
+public class SoundListener {
 	
-	public Listener()  {
+	public SoundListener()  {
 	}
 	
 	private void getDataFromMicrophone()  {

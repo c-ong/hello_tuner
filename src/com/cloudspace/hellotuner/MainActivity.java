@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends Activity implements OnClickListener {
 
-	private Listener listener = new Listener();
+	private SoundListener listener = new SoundListener();
 	private boolean running = false;
 
 	@Override
