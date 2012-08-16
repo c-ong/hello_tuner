@@ -11,7 +11,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends Activity implements OnClickListener {
+public class MainActivity
+extends Activity
+implements OnClickListener {
 
 	private SoundListener listener = new SoundListener();
 	private boolean running = false;
