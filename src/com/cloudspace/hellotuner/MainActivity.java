@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivity
@@ -64,20 +65,29 @@ implements OnClickListener {
 		decibelUpdateHandler.removeCallbacks(decibelUpdateCallback);
 	}
 
+	private void updateCurrentDecibel() {
+		Log.v("updateCurrentDecibel", "got called");
+		
+		int currentDecibels = listener.getCurrentDecibels();
+		
+		TextView dBCurrent = (TextView)findViewById(R.id.dBText);
+		dBCurrent.setText(String.valueOf(currentDecibels));
+		
+		ProgressBar dBProgressBar = (ProgressBar)findViewById(R.id.dBProgressBarOutput);
+		dBProgressBar.setProgress(currentDecibels);
+	}
+
 	private void startSoundListening(View v)  {
 		listener.start();
 		Button button = (Button) v;
 		button.setText(getResources().getString(R.string.stop));
-		
-		decibelUpdateCallback = new Runnable() {
-	    public void run()
-	    {
-				TextView dBCurrent = (TextView)findViewById(R.id.dBText);
-				dBCurrent.setText(String.valueOf(listener.getCurrentDecibels()));
-	    }
-	};
-		
-		decibelUpdateHandler.post(decibelUpdateCallback);
 
+		decibelUpdateCallback = new Runnable() {
+			public void run() {
+				updateCurrentDecibel();
+			}
+		};
+
+		decibelUpdateHandler.post(decibelUpdateCallback);
 	}
 }
