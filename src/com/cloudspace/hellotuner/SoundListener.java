@@ -1,14 +1,15 @@
 package com.cloudspace.hellotuner;
 
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class SoundListener {
 	
 	private Timer timer;
+	protected Random rand = new Random();
 	
 	public SoundListener()  {
-		timer = new Timer("SoundTimer", true);
 	}
 	
 	private void getDataFromMicrophone()  {
@@ -20,7 +21,7 @@ public class SoundListener {
 	}
 	
 	public int getCurrentDecibels()  {
-		return 10;
+		return rand.nextInt(100);
 	}
 	
 	public int getHighestDecibels()  {
@@ -33,6 +34,8 @@ public class SoundListener {
 	}
 	
 	public void start()  {
+		timer = new Timer("SoundTimer", true);
+
 		//start calling run in a timertask
 		TimerTask timerTask = new TimerTask(){
 			public void run()  {

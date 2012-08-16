@@ -4,7 +4,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,7 +20,9 @@ implements OnClickListener {
 
 	private SoundListener listener = new SoundListener();
 	private boolean running = false;
-	private Timer decibelUpdateTimer = new Timer("DecibelUpdateTimer", true);
+	Handler decibelUpdateHandler;
+	Runnable decibelUpdateCallback;
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -25,6 +30,7 @@ implements OnClickListener {
 		setContentView(R.layout.activity_main);
 		Button start = (Button)findViewById(R.id.start);
 		start.setOnClickListener(this);
+		decibelUpdateHandler = new Handler(Looper.getMainLooper());
 	}
 
 	@Override
@@ -40,7 +46,7 @@ implements OnClickListener {
 			break;
 		}		
 	}   
-	
+
 	private void toggleSoundListening(View v)  {
 		if(running)  {
 			stopSoundListening(v);
@@ -51,23 +57,27 @@ implements OnClickListener {
 	}
 	private void stopSoundListening(View v)  {
 		listener.stop();
+
 		Button button = (Button) v;
-		button.setText(getResources().getString(R.string.stop));
-		
-		TimerTask decibelUpdateTask = new TimerTask()  {
-			public void run()  {
-				TextView dBCurrent = (TextView)findViewById(R.id.dBText);
-				dBCurrent.setText(listener.getCurrentDecibels());
-			}
-		};
-		decibelUpdateTimer.scheduleAtFixedRate(decibelUpdateTask, 0, 100);
+		button.setText(getResources().getString(R.string.start));
+
+		decibelUpdateHandler.removeCallbacks(decibelUpdateCallback);
 	}
-	
+
 	private void startSoundListening(View v)  {
 		listener.start();
 		Button button = (Button) v;
-		button.setText(getResources().getString(R.string.start));
+		button.setText(getResources().getString(R.string.stop));
 		
-		decibelUpdateTimer.cancel();
+		decibelUpdateCallback = new Runnable() {
+	    public void run()
+	    {
+				TextView dBCurrent = (TextView)findViewById(R.id.dBText);
+				dBCurrent.setText(String.valueOf(listener.getCurrentDecibels()));
+	    }
+	};
+		
+		decibelUpdateHandler.post(decibelUpdateCallback);
+
 	}
 }
