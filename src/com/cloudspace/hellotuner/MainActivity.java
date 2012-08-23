@@ -24,7 +24,6 @@ implements OnClickListener {
 	Handler decibelUpdateHandler;
 	Runnable decibelUpdateCallback;
 
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,6 +68,7 @@ implements OnClickListener {
 		Log.v("updateCurrentDecibel", "got called");
 		
 		int currentDecibels = listener.getCurrentDecibels();
+		Log.e("current decibels from frontend", currentDecibels + "");
 		
 		TextView dBCurrent = (TextView)findViewById(R.id.dBText);
 		dBCurrent.setText(String.valueOf(currentDecibels));
