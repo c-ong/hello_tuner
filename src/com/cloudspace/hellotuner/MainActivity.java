@@ -31,6 +31,11 @@ implements OnClickListener {
 		Button start = (Button)findViewById(R.id.start);
 		start.setOnClickListener(this);
 		decibelUpdateHandler = new Handler(Looper.getMainLooper());
+		decibelUpdateCallback = new Runnable() {
+			public void run() {
+				updateCurrentDecibel();
+			}
+		};
 	}
 
 	@Override
@@ -75,19 +80,15 @@ implements OnClickListener {
 		
 		ProgressBar dBProgressBar = (ProgressBar)findViewById(R.id.dBProgressBarOutput);
 		dBProgressBar.setProgress(currentDecibels);
+		
+		decibelUpdateHandler.post(decibelUpdateCallback);
 	}
 
 	private void startSoundListening(View v)  {
 		listener.start();
 		Button button = (Button) v;
 		button.setText(getResources().getString(R.string.stop));
-
-		decibelUpdateCallback = new Runnable() {
-			public void run() {
-				updateCurrentDecibel();
-			}
-		};
-
+		
 		decibelUpdateHandler.post(decibelUpdateCallback);
 	}
 }

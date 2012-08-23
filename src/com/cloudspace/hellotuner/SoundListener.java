@@ -1,6 +1,5 @@
 package com.cloudspace.hellotuner;
 
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -46,8 +45,15 @@ public class SoundListener {
 	
 	private void updateBuffers()  {
 		recorder.read(recorderBuffer,0,recorderBufferSize);
-		//randomly chose 1000, not sure what the buffer contents actually are
-		currentDecibels = recorderBuffer[1000];		
+		
+		//get the buffer location with the highest amplitude and set to currentDecibels
+		int maxAmplitude = 0;
+		for(int i = 0; i < recorderBufferSize; i++)  {
+			if(recorderBuffer[i] > maxAmplitude)  {
+				maxAmplitude = recorderBuffer[i];
+			}
+		}
+		currentDecibels = maxAmplitude;		
 	}
 	
 	//information here: http://stackoverflow.com/questions/4871149/how-to-record-voice-in-wav-formt-using-android
