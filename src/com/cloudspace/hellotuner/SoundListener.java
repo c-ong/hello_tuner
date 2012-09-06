@@ -57,6 +57,7 @@ public class SoundListener {
 	}
 	
 	//information here: http://stackoverflow.com/questions/4871149/how-to-record-voice-in-wav-formt-using-android
+	//sound analysis here: http://stackoverflow.com/questions/5511250/capturing-sound-for-analysis-and-visualizing-frequencies-in-android
 	public void start()  {
 		recorder.startRecording();
 
