@@ -1,14 +1,12 @@
 package com.cloudspace.hellotuner;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -28,6 +26,9 @@ implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		SurfaceView waveformView = (SurfaceView)findViewById(R.id.waveformView);
+		
 		Button start = (Button)findViewById(R.id.start);
 		start.setOnClickListener(this);
 		decibelUpdateHandler = new Handler(Looper.getMainLooper());
@@ -69,9 +70,7 @@ implements OnClickListener {
 		decibelUpdateHandler.removeCallbacks(decibelUpdateCallback);
 	}
 
-	private void updateCurrentDecibel() {
-		Log.v("updateCurrentDecibel", "got called");
-		
+	private void updateCurrentDecibel() {		
 		int currentDecibels = listener.getCurrentDecibels();
 		Log.e("current decibels from frontend", currentDecibels + "");
 		
